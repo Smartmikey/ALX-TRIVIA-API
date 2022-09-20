@@ -102,3 +102,76 @@ createdb trivia_test
 psql trivia_test < trivia.psql
 python test_flaskr.py
 ```
+
+
+#Endpoints - Trivia API
+
+`GET /categories`
+- Fetches a dictionary of categories
+- Request Arguments: None
+
+A sample response
+```json
+{
+    "categories": [
+        "Science",
+        "Art",
+        "Geography",
+        "History",
+        "Entertainment",
+        "Sports"
+    ],
+    "success": true,
+    "total_categories": 6
+}
+```
+
+`GET /questions`
+- Fetches a dictionary of questions
+- Request Arguments: None
+
+a sample response
+```json
+{
+    "categories": [
+        "Science",
+        "Art",
+        "Geography",
+        "History",
+        "Entertainment",
+        "Sports"
+    ],
+    "current_category": "ALL",
+    "questions": [
+        {
+            "answer": "Apollo 13",
+            "category": 5,
+            "difficulty": 4,
+            "id": 2,
+            "question": "What movie earned Tom Hanks his third straight Oscar nomination, in 1996?"
+        },
+        {
+            "answer": "Tom Cruise",
+            "category": 5,
+            "difficulty": 4,
+            "id": 4,
+            "question": "What actor did author Anne Rice first denounce, then praise in the role of her beloved Lestat?"
+        }    
+    ],
+    "success": true,
+    "total_questions": 2
+}
+```
+
+`DELETE /questions/${ID}`
+- Delete a question from the database
+- Request Arguments: ID
+- Argument type: INTEGER
+
+```json
+{
+    "deleted": 23,
+    "success": true,
+    "total_questions": 1
+}
+```
