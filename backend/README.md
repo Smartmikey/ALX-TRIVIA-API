@@ -104,7 +104,7 @@ python test_flaskr.py
 ```
 
 
-#Endpoints - Trivia API
+# Endpoints - Trivia API
 
 `GET /categories`
 - Fetches a dictionary of categories
@@ -168,10 +168,51 @@ a sample response
 - Request Arguments: ID
 - Argument type: INTEGER
 
+a sample response
 ```json
 {
     "deleted": 23,
     "success": true,
     "total_questions": 1
+}
+```
+
+`POST /questions `
+- Create a new question
+- Request Arguments: {question, answer, category, difficulty}
+
+a sample response
+```json
+{
+  "success": true,  
+}
+```
+
+`POST /questions/search`
+- Search for a question with any word
+- Request arguments: {searchTerm}
+
+a sample response
+```json
+{
+  "success": true,
+  "total_questions": 6,
+  "current_category": "ALL",
+  "questions": [
+        {
+            "answer": "Apollo 13",
+            "category": 5,
+            "difficulty": 4,
+            "id": 2,
+            "question": "What movie earned Tom Hanks his third straight Oscar nomination, in 1996?"
+        },
+        {
+            "answer": "Tom Cruise",
+            "category": 5,
+            "difficulty": 4,
+            "id": 4,
+            "question": "What actor did author Anne Rice first denounce, then praise in the role of her beloved Lestat?"
+        }    
+    ],
 }
 ```
