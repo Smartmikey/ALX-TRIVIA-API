@@ -175,8 +175,10 @@ def create_app(test_config=None):
     def search_questions():
         body = request.get_json()
         search_query = body.get('searchTerm', None).lower()
-        print(search_query)
-        questions = Question.query.order_by(Question.id).filter(Question.question.ilike('%{}%'.format(search_query))).all()
+        questions = Question.query.order_by(
+            Question.id).filter(
+            Question.question.ilike(
+                '%{}%'.format(search_query))).all()
         formattedQuestions = [question.format() for question in questions]
         return jsonify({
             'success': True,
@@ -195,12 +197,14 @@ def create_app(test_config=None):
     """
     @app.route('/categories/<int:category_id>/questions')
     def get_questions_by_category(category_id):
-        current_category = Category.query.filter(Category.id == category_id + 1).one_or_none()
+        current_category = Category.query.filter(
+            Category.id == category_id + 1).one_or_none()
 
         if (current_category is None):
             abort(404)
         try:
-            questions = Question.query.filter(Question.category == category_id + 1).all()
+            questions = Question.query.filter(
+                Question.category == category_id + 1).all()
             formattedQuestions = [question.format() for question in questions]
 
             return jsonify({
@@ -231,15 +235,18 @@ def create_app(test_config=None):
             quiz_category = body.get("quiz_category")
             if (quiz_category == 0 or quiz_category['id'] == 0):
                 questions = Question.query.all()
-                formattedQuestions =[question.format() for question in questions]
-                return jsonify({
-                    'success': True,
-                    'question': formattedQuestions[random.randint(0, len(formattedQuestions) - 1)]
-                })
+                formattedQuestions = [question.format()
+                                      for question in questions]
+                randomQuestion = random.randint(0, len(formattedQuestions) - 1)
+                formattedQuestions = formattedQuestions[randomQuestion]
+                return jsonify({'success': True,
+                                'question': formattedQuestions})
             else:
-                questions = Question.query.filter(Question.category == quiz_category['id']).all()
+                questions = Question.query.filter(
+                    Question.category == quiz_category['id']).all()
 
-                formattedQuestions = [question.format() for question in questions]
+                formattedQuestions = [question.format()
+                                      for question in questions]
 
                 for single_question in formattedQuestions:
                     while single_question['id'] not in previous_questions:
